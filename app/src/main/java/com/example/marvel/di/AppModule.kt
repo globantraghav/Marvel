@@ -18,7 +18,7 @@ object AppModule {
 
         @Provides
         @Singleton
-        fun providesCountryApi():NetworkApi{
+        fun providesNetworkApi():NetworkApi{
             return Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -28,7 +28,7 @@ object AppModule {
 
         @Provides
         @Singleton
-        fun providesCountryRepo(api:NetworkApi):MarvelRepo{
+        fun providesMarvelRepo(api:NetworkApi):MarvelRepo{
             return MarvelRepoImpl(api)
         }
 

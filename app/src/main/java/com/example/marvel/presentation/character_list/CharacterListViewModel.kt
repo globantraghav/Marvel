@@ -16,20 +16,20 @@ class CharacterListViewModel @Inject constructor(
     private val characterListUseCase: CharacterListUseCase
 ):ViewModel() {
 
-    private val _marvelList = MutableLiveData(MarvelListState())
-    val marvelList : LiveData<MarvelListState> = _marvelList
+    private val _marvelList = MutableLiveData(MarvelListData())
+    val marvelList : LiveData<MarvelListData> = _marvelList
 
     fun getCharacters(offset:Int){
         characterListUseCase(offset).onEach {result->
             when(result){
                 is Resource.Success->{
-                    _marvelList.value = MarvelListState(characterList = result.data?: emptyList())
+                    _marvelList.value = MarvelListData(characterList = result.data?: emptyList())
                 }
                 is Resource.Error->{
-                    _marvelList.value = MarvelListState(error = result.message?:"Unexpected Error")
+                    _marvelList.value = MarvelListData(error = result.message?:"Unexpected Error")
                 }
                 is Resource.Loading->{
-                    _marvelList.value = MarvelListState(isLoading = true)
+                    _marvelList.value = MarvelListData(isLoading = true)
                 }
             }
         }.launchIn(viewModelScope)

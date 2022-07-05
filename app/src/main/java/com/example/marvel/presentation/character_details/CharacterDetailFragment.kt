@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.coroutineScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.example.marvel.common.Constants
 import com.example.marvel.databinding.FragmentCharacterDetailsBinding
 import com.example.marvel.domain.model.CharacterDetail
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,7 +61,7 @@ class CharacterDetailFragment:Fragment() {
                     setUI(it.characterDetails)
                 }
             }
-            delay(1000)
+            delay(Constants.DELAY)
         }
     }
 

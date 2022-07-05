@@ -5,6 +5,5 @@ class CharacterDetail(
     val name:String,
     val description:String,
     val thumbnail:String,
-    val thumbnailExt:String,
-    val comics:List<String>
-)
+    val thumbnailExt:String
+    )

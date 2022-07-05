@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.marvel.common.Constants
 import com.example.marvel.databinding.FragmentCharacterListBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -93,7 +94,7 @@ class CharacterListFragment : Fragment() {
                         characterListAdapter.setContentList(it.characterList.toMutableList())
                     }
                 }
-                delay(1000)
+                delay(Constants.DELAY)
         }
     }
 
