@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.marvel.common.Constants
-import com.example.marvel.common.Resource
-import com.example.marvel.domain.useCases.GetCharacterListUseCase
+import com.example.common.Constant
+import com.example.common.Resource
+import com.example.domain.useCases.GetCharacterListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -29,7 +29,7 @@ class CharacterListViewModel @Inject constructor(
                 }
                 is Resource.Error -> {
                     _marvelList.value =
-                        MarvelListData(error = result.message ?: Constants.Unexpected_Error)
+                        MarvelListData(error = result.message ?: Constant.Unexpected_Error)
                 }
                 is Resource.Loading -> {
                     _marvelList.value = MarvelListData(isLoading = true)

@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.marvel.common.Constants
+import com.example.common.Constant
+import com.example.domain.model.ModelCharacter
 import com.example.marvel.databinding.ItemCharactersBinding
-import com.example.marvel.domain.model.ModelCharacter
 
 class CharacterListAdapter(
     private val context: Context,
@@ -34,8 +34,8 @@ class CharacterListAdapter(
         holder.characterName.text = modelCharacterList[position].name
         val url = "${
             modelCharacterList[position].thumbnail.replace(
-                Constants.HTTP,
-                Constants.HTTPS
+                Constant.HTTP,
+                Constant.HTTPS
             )
         }/portrait_xlarge.${modelCharacterList[position].thumbnailExt}"
         Glide.with(context)

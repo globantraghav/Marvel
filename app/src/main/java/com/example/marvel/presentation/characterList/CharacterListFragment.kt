@@ -11,7 +11,7 @@ import androidx.lifecycle.coroutineScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.marvel.common.Constants
+import com.example.common.Constant
 import com.example.marvel.databinding.FragmentCharacterListBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -25,7 +25,7 @@ class CharacterListFragment : Fragment() {
     private lateinit var layoutManager: GridLayoutManager
     private val characterListViewModel: CharacterListViewModel by viewModels()
     private lateinit var binding: FragmentCharacterListBinding
-    private var paginatedValue = Constants.ZERO
+    private var paginatedValue = Constant.ZERO
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +48,7 @@ class CharacterListFragment : Fragment() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (layoutManager.findLastVisibleItemPosition() == layoutManager.itemCount - 1) {
-                    paginatedValue += Constants.paginatedValue
+                    paginatedValue += Constant.paginatedValue
                     characterListViewModel.getCharactersList(paginatedValue)
                     observeList()
                 }
@@ -58,7 +58,7 @@ class CharacterListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        paginatedValue = Constants.ZERO
+        paginatedValue = Constant.ZERO
         characterListViewModel.getCharactersList(paginatedValue)
         observeList()
     }
@@ -88,7 +88,7 @@ class CharacterListFragment : Fragment() {
                     characterListAdapter.setContentList(it.modelCharacterList.toMutableList())
                 }
             }
-            delay(Constants.DELAY)
+            delay(Constant.DELAY)
         }
     }
 

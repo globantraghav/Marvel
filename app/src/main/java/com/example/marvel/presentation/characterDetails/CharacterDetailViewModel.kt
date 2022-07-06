@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.marvel.common.Constants
-import com.example.marvel.common.Resource
-import com.example.marvel.domain.model.ModelCharacterDetail
-import com.example.marvel.domain.useCases.GetCharacterDetailsUseCase
+import com.example.common.Constant
+import com.example.common.Resource
+import com.example.domain.model.ModelCharacterDetail
+import com.example.domain.useCases.GetCharacterDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -35,7 +35,7 @@ class CharacterDetailViewModel @Inject constructor(
                 }
                 is Resource.Error -> {
                     _characterDetails.value =
-                        CharacterDetailData(error = result.message ?: Constants.Unexpected_Error)
+                        CharacterDetailData(error = result.message ?: Constant.Unexpected_Error)
                 }
                 is Resource.Loading -> {
                     _characterDetails.value = CharacterDetailData(isLoading = true)
@@ -45,13 +45,13 @@ class CharacterDetailViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    private fun setUrl(modelCharacterDetail: ModelCharacterDetail?){
+    private fun setUrl(modelCharacterDetail: ModelCharacterDetail?) {
         val url = "${
             modelCharacterDetail?.thumbnail?.replace(
-                Constants.HTTP,
-                Constants.HTTPS
+                Constant.HTTP,
+                Constant.HTTPS
             )
-        }${Constants.IMAGE_EXTENSION}${modelCharacterDetail?.thumbnailExt}"
+        }${Constant.IMAGE_EXTENSION}${modelCharacterDetail?.thumbnailExt}"
 
         _characterImageUrl.value = url
 

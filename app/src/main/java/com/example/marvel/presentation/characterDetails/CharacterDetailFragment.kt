@@ -10,9 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.coroutineScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.example.marvel.common.Constants
+import com.example.common.Constant
+import com.example.domain.model.ModelCharacterDetail
 import com.example.marvel.databinding.FragmentCharacterDetailsBinding
-import com.example.marvel.domain.model.ModelCharacterDetail
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 
@@ -60,7 +60,7 @@ class CharacterDetailFragment : Fragment() {
                     setUI(it.modelCharacterDetails)
                 }
             }
-            delay(Constants.DELAY)
+            delay(Constant.DELAY)
         }
     }
 

@@ -1,11 +1,11 @@
 package com.example.marvel.presentation.characterList
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.example.common.Constant
+import com.example.common.Resource
+import com.example.domain.model.ModelCharacter
+import com.example.domain.useCases.GetCharacterListUseCase
 import com.example.marvel.MainCoroutineRule
-import com.example.marvel.common.Constants
-import com.example.marvel.common.Resource
-import com.example.marvel.domain.model.ModelCharacter
-import com.example.marvel.domain.useCases.GetCharacterListUseCase
 import com.example.marvel.getOrAwaitValue
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -46,14 +46,14 @@ class CharacterListViewModelTest {
             val actualResponse = MarvelListData(
                 isLoading = false,
                 modelCharacterList = emptyList(),
-                error = Constants.Empty_String
+                error = Constant.Empty_String
             )
-            coEvery { useCase.invoke(Constants.paginatedValue) } returns flowOf(
+            coEvery { useCase.invoke(Constant.paginatedValue) } returns flowOf(
                 Resource.Success(
                     emptyList()
                 )
             )
-            viewModel.getCharactersList(Constants.paginatedValue)
+            viewModel.getCharactersList(Constant.paginatedValue)
             Assert.assertEquals(viewModel.marvelList.getOrAwaitValue(), actualResponse)
         }
     }
@@ -66,29 +66,29 @@ class CharacterListViewModelTest {
                 isLoading = false,
                 modelCharacterList = listOf(
                     ModelCharacter(
-                        Constants.ID_1,
-                        Constants.Iron_Man,
-                        Constants.Best_Avenger,
-                        Constants.Iron_Man_Image,
-                        Constants.IMG_JPG
+                        Constant.ID_1,
+                        Constant.Iron_Man,
+                        Constant.Best_Avenger,
+                        Constant.Iron_Man_Image,
+                        Constant.IMG_JPG
                     )
                 ),
-                error = Constants.Empty_String
+                error = Constant.Empty_String
             )
-            coEvery { useCase.invoke(Constants.paginatedValue) } returns flowOf(
+            coEvery { useCase.invoke(Constant.paginatedValue) } returns flowOf(
                 Resource.Success(
                     listOf(
                         ModelCharacter(
-                            Constants.ID_1,
-                            Constants.Iron_Man,
-                            Constants.Best_Avenger,
-                            Constants.Iron_Man_Image,
-                            Constants.IMG_JPG
+                            Constant.ID_1,
+                            Constant.Iron_Man,
+                            Constant.Best_Avenger,
+                            Constant.Iron_Man_Image,
+                            Constant.IMG_JPG
                         )
                     )
                 )
             )
-            viewModel.getCharactersList(Constants.paginatedValue)
+            viewModel.getCharactersList(Constant.paginatedValue)
             Assert.assertEquals(viewModel.marvelList.getOrAwaitValue(), actualResponse)
         }
     }
@@ -100,14 +100,14 @@ class CharacterListViewModelTest {
             val actualResponse = MarvelListData(
                 isLoading = false,
                 modelCharacterList = emptyList(),
-                error = Constants.Non_Empty_List
+                error = Constant.Non_Empty_List
             )
-            coEvery { useCase.invoke(Constants.paginatedValue) } returns flowOf(
+            coEvery { useCase.invoke(Constant.paginatedValue) } returns flowOf(
                 Resource.Error(
-                    Constants.Non_Empty_List
+                    Constant.Non_Empty_List
                 )
             )
-            viewModel.getCharactersList(Constants.paginatedValue)
+            viewModel.getCharactersList(Constant.paginatedValue)
             Assert.assertEquals(viewModel.marvelList.getOrAwaitValue(), actualResponse)
         }
     }
@@ -120,29 +120,29 @@ class CharacterListViewModelTest {
                 isLoading = false,
                 modelCharacterList = listOf(
                     ModelCharacter(
-                        Constants.ID_1,
-                        Constants.Iron_Man,
-                        Constants.Best_Avenger,
-                        Constants.Iron_Man_Image,
-                        Constants.IMG_JPG
+                        Constant.ID_1,
+                        Constant.Iron_Man,
+                        Constant.Best_Avenger,
+                        Constant.Iron_Man_Image,
+                        Constant.IMG_JPG
                     )
                 ),
-                error = Constants.Empty_String
+                error = Constant.Empty_String
             )
-            coEvery { useCase.invoke(Constants.paginatedValue) } returns flowOf(
+            coEvery { useCase.invoke(Constant.paginatedValue) } returns flowOf(
                 Resource.Success(
                     listOf(
                         ModelCharacter(
-                            Constants.ID_2,
-                            Constants.Captain,
-                            Constants.First_Avenger,
-                            Constants.Captain_America_Image,
-                            Constants.IMG_JPG
+                            Constant.ID_2,
+                            Constant.Captain,
+                            Constant.First_Avenger,
+                            Constant.Captain_America_Image,
+                            Constant.IMG_JPG
                         )
                     )
                 )
             )
-            viewModel.getCharactersList(Constants.paginatedValue)
+            viewModel.getCharactersList(Constant.paginatedValue)
             Assert.assertNotEquals(viewModel.marvelList.getOrAwaitValue(), actualResponse)
         }
     }

@@ -1,11 +1,11 @@
 package com.example.marvel.presentation.characterDetails
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.example.common.Constant
+import com.example.common.Resource
+import com.example.domain.model.ModelCharacterDetail
+import com.example.domain.useCases.GetCharacterDetailsUseCase
 import com.example.marvel.MainCoroutineRule
-import com.example.marvel.common.Constants
-import com.example.marvel.common.Resource
-import com.example.marvel.domain.model.ModelCharacterDetail
-import com.example.marvel.domain.useCases.GetCharacterDetailsUseCase
 import com.example.marvel.getOrAwaitValue
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
@@ -39,21 +39,21 @@ class CharacterDetailViewModelTest {
     @Test
     fun testCharactersDetailsForEqualResponse() {
         val modelCharacterDetailMock = ModelCharacterDetail(
-            Constants.ID_1,
-            Constants.Iron_Man,
-            Constants.Best_Avenger,
-            Constants.Iron_Man_Image,
-            Constants.IMG_JPG
+            Constant.ID_1,
+            Constant.Iron_Man,
+            Constant.Best_Avenger,
+            Constant.Iron_Man_Image,
+            Constant.IMG_JPG
         )
 
         runTest {
             val actualResponse = CharacterDetailData(
                 isLoading = false,
                 modelCharacterDetails = modelCharacterDetailMock,
-                error = Constants.Empty_String
+                error = Constant.Empty_String
             )
-            coEvery { useCase.invoke(Constants.ID_1) } returns flowOf(Resource.Success(modelCharacterDetailMock))
-            viewModel.getCharacterDetails(Constants.ID_1)
+            coEvery { useCase.invoke(Constant.ID_1) } returns flowOf(Resource.Success(modelCharacterDetailMock))
+            viewModel.getCharacterDetails(Constant.ID_1)
             Assert.assertEquals(viewModel.characterDetails.getOrAwaitValue(), actualResponse)
         }
     }
@@ -61,28 +61,28 @@ class CharacterDetailViewModelTest {
     @Test
     fun testCharactersDetailsForNonEqualResponse() {
         val modelCharacterDetailMock = ModelCharacterDetail(
-            Constants.ID_1,
-            Constants.Iron_Man,
-            Constants.Best_Avenger,
-            Constants.Iron_Man_Image,
-            Constants.IMG_JPG
+            Constant.ID_1,
+            Constant.Iron_Man,
+            Constant.Best_Avenger,
+            Constant.Iron_Man_Image,
+            Constant.IMG_JPG
         )
         val modelCharacterDetailActual = ModelCharacterDetail(
-            Constants.ID_2,
-            Constants.Captain,
-            Constants.First_Avenger,
-            Constants.Captain_America_Image,
-            Constants.IMG_JPG
+            Constant.ID_2,
+            Constant.Captain,
+            Constant.First_Avenger,
+            Constant.Captain_America_Image,
+            Constant.IMG_JPG
         )
 
         runTest {
             val actualResponse = CharacterDetailData(
                 isLoading = false,
                 modelCharacterDetails = modelCharacterDetailActual,
-                error = Constants.Empty_String
+                error = Constant.Empty_String
             )
-            coEvery { useCase.invoke(Constants.ID_1) } returns flowOf(Resource.Success(modelCharacterDetailMock))
-            viewModel.getCharacterDetails(Constants.ID_1)
+            coEvery { useCase.invoke(Constant.ID_1) } returns flowOf(Resource.Success(modelCharacterDetailMock))
+            viewModel.getCharacterDetails(Constant.ID_1)
             Assert.assertNotEquals(viewModel.characterDetails.getOrAwaitValue(), actualResponse)
         }
     }
@@ -94,10 +94,10 @@ class CharacterDetailViewModelTest {
             val actualResponse = CharacterDetailData(
                 isLoading = false,
                 modelCharacterDetails = null,
-                error = Constants.Non_Empty_Character_Details
+                error = Constant.Non_Empty_Character_Details
             )
-            coEvery { useCase.invoke(Constants.ID_1) } returns flowOf(Resource.Error(Constants.Non_Empty_Character_Details))
-            viewModel.getCharacterDetails(Constants.ID_1)
+            coEvery { useCase.invoke(Constant.ID_1) } returns flowOf(Resource.Error(Constant.Non_Empty_Character_Details))
+            viewModel.getCharacterDetails(Constant.ID_1)
             Assert.assertEquals(viewModel.characterDetails.getOrAwaitValue(), actualResponse)
         }
     }
