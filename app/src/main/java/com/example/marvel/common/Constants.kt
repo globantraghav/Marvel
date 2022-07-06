@@ -32,6 +32,10 @@ class Constants {
         const val Empty_String = ""
         const val ID_1 = 1
         const val ID_2 = 2
+        const val ZERO = 0
+        const val HTTP = "http"
+        const val HTTPS = "https"
+        const val IMAGE_EXTENSION = "/portrait_xlarge."
 
     }
 

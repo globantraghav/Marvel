@@ -25,8 +25,7 @@ class CharacterListFragment : Fragment() {
     private lateinit var layoutManager: GridLayoutManager
     private val characterListViewModel: CharacterListViewModel by viewModels()
     private lateinit var binding: FragmentCharacterListBinding
-    private var flag = 3
-    private var paginatedValue = 0
+    private var paginatedValue = Constants.ZERO
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,7 +48,7 @@ class CharacterListFragment : Fragment() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (layoutManager.findLastVisibleItemPosition() == layoutManager.itemCount - 1) {
-                    paginatedValue += 20
+                    paginatedValue += Constants.paginatedValue
                     characterListViewModel.getCharactersList(paginatedValue)
                     observeList()
                 }
@@ -59,7 +58,7 @@ class CharacterListFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        paginatedValue = 0
+        paginatedValue = Constants.ZERO
         characterListViewModel.getCharactersList(paginatedValue)
         observeList()
     }
@@ -79,7 +78,6 @@ class CharacterListFragment : Fragment() {
                     binding.progressBar.visibility = View.VISIBLE
                 } else if (it.error.isNotBlank()) {
                     binding.progressBar.visibility = View.GONE
-                    flag = 0
                     Toast.makeText(
                         this@CharacterListFragment.requireContext(),
                         it.error,
@@ -87,7 +85,6 @@ class CharacterListFragment : Fragment() {
                     ).show()
                 } else if (it.modelCharacterList.isNotEmpty()) {
                     binding.progressBar.visibility = View.GONE
-                    flag = 0
                     characterListAdapter.setContentList(it.modelCharacterList.toMutableList())
                 }
             }

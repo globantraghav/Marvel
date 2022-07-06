@@ -65,19 +65,15 @@ class CharacterDetailFragment : Fragment() {
     }
 
     private fun setUI(modelCharacterDetail: ModelCharacterDetail?) {
-        val url = "${
-            modelCharacterDetail?.thumbnail?.replace(
-                "http",
-                "https"
-            )
-        }/portrait_xlarge.${modelCharacterDetail?.thumbnailExt}"
+
+        characterDetailsViewModel.characterImageUrl.observe(viewLifecycleOwner) { url ->
+            Glide.with(this)
+                .load(url)
+                .into(binding.ivCharacter)
+        }
 
         binding.tvCharacterName.text = modelCharacterDetail?.name
         binding.tvCharacterDescription.text = modelCharacterDetail?.description
-
-        Glide.with(this)
-            .load(url)
-            .into(binding.ivCharacter)
 
     }
 
