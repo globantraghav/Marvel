@@ -1,4 +1,4 @@
-package com.example.marvel.presentation.character_details
+package com.example.marvel.presentation.characterDetails
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,19 +12,20 @@ import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.marvel.common.Constants
 import com.example.marvel.databinding.FragmentCharacterDetailsBinding
-import com.example.marvel.domain.model.CharacterDetail
+import com.example.marvel.domain.model.ModelCharacterDetail
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 
 @AndroidEntryPoint
-class CharacterDetailFragment:Fragment() {
+class CharacterDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentCharacterDetailsBinding
     private val characterDetailsViewModel: CharacterDetailViewModel by viewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentCharacterDetailsBinding.inflate(inflater,container,false)
+        binding = FragmentCharacterDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -33,7 +34,7 @@ class CharacterDetailFragment:Fragment() {
 
         arguments?.let {
             val args = CharacterDetailFragmentArgs.fromBundle(it)
-            val charId:Int = args.characterId
+            val charId: Int = args.characterId
             characterDetailsViewModel.getCharacterDetails(charId)
         }
 
@@ -45,31 +46,34 @@ class CharacterDetailFragment:Fragment() {
 
     }
 
-    private fun observeViewModel(){
+    private fun observeViewModel() {
         lifecycle.coroutineScope.launchWhenCreated {
             characterDetailsViewModel.characterDetails.observe(viewLifecycleOwner) { it ->
-                if (it.isLoading) {
-                }
+
                 if (it.error.isNotBlank()) {
                     Toast.makeText(
                         this@CharacterDetailFragment.requireContext(),
                         it.error,
                         Toast.LENGTH_LONG
                     ).show()
-                }
-                if (it.characterDetails!=null) {
-                    setUI(it.characterDetails)
+                } else if (it.modelCharacterDetails != null) {
+                    setUI(it.modelCharacterDetails)
                 }
             }
             delay(Constants.DELAY)
         }
     }
 
-    private fun setUI(characterDetail: CharacterDetail?){
-        val url = "${characterDetail?.thumbnail?.replace("http","https")}/portrait_xlarge.${characterDetail?.thumbnailExt}"
+    private fun setUI(modelCharacterDetail: ModelCharacterDetail?) {
+        val url = "${
+            modelCharacterDetail?.thumbnail?.replace(
+                "http",
+                "https"
+            )
+        }/portrait_xlarge.${modelCharacterDetail?.thumbnailExt}"
 
-        binding.tvCharacterName.text = characterDetail?.name
-        binding.tvCharacterDescription.text = characterDetail?.description
+        binding.tvCharacterName.text = modelCharacterDetail?.name
+        binding.tvCharacterDescription.text = modelCharacterDetail?.description
 
         Glide.with(this)
             .load(url)

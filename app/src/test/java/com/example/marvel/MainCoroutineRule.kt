@@ -9,7 +9,7 @@ import org.junit.rules.TestWatcher
 import org.junit.runner.Description
 
 @ExperimentalCoroutinesApi
-class MainCoroutineRule: TestWatcher() {
+class MainCoroutineRule : TestWatcher() {
 
     override fun starting(description: Description) {
         super.starting(description)

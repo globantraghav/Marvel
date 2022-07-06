@@ -1,16 +1,15 @@
-package com.example.marvel.data.remote.dto.character_detail
+package com.example.marvel.data.remote.dto.characterList
 
-import com.example.marvel.domain.model.CharacterDetail
+import com.example.marvel.domain.model.ModelCharacter
 
 data class Result(
     val description: String,
     val id: Int,
     val name: String,
-    val thumbnail: Thumbnail
-    ){
-
-    fun toCharacterDetail(): CharacterDetail {
-        return CharacterDetail(
+    val thumbnail: Thumbnail,
+) {
+    fun toCharacterModel(): ModelCharacter {
+        return ModelCharacter(
             id = id,
             name = name,
             description = description,
@@ -18,4 +17,6 @@ data class Result(
             thumbnailExt = thumbnail.extension
         )
     }
+
 }
+

@@ -16,20 +16,20 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-        @Provides
-        @Singleton
-        fun providesNetworkApi():NetworkApi{
-            return Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-                .create(NetworkApi::class.java)
-        }
+    @Provides
+    @Singleton
+    fun providesNetworkApi(): NetworkApi {
+        return Retrofit.Builder()
+            .baseUrl(Constants.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(NetworkApi::class.java)
+    }
 
-        @Provides
-        @Singleton
-        fun providesMarvelRepo(api:NetworkApi):MarvelRepo{
-            return MarvelRepoImpl(api)
-        }
+    @Provides
+    @Singleton
+    fun providesMarvelRepo(api: NetworkApi): MarvelRepo {
+        return MarvelRepoImpl(api)
+    }
 
 }
