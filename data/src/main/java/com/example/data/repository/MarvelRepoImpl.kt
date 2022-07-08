@@ -2,8 +2,6 @@ package com.example.data.repository
 
 import com.example.data.mappers.toDomain
 import com.example.data.remote.NetworkApi
-import com.example.data.remote.dto.characterDetail.CharacterDetailDto
-import com.example.data.remote.dto.characterList.CharacterListDto
 import com.example.data.remote.utils.SafeApiRequest
 import com.example.domain.model.ModelCharacter
 import com.example.domain.model.ModelCharacterDetail
