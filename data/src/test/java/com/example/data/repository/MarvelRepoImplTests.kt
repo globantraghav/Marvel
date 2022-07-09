@@ -5,13 +5,13 @@ import com.example.common.Constant
 import com.example.data.MainCoroutineRule
 import com.example.data.remote.NetworkApi
 import io.mockk.MockKAnnotations
+import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mockito
 
 @ExperimentalCoroutinesApi
 class MarvelRepoImplTests {
@@ -38,7 +38,9 @@ class MarvelRepoImplTests {
     fun testCharacterListCalled() {
         runTest {
             repoImpl.getCharactersList(Constant.paginatedValue)
-            Mockito.verify(networkApi.getCharactersList(offset = Constant.paginatedValue.toString()))
+            coVerify {
+                networkApi.getCharactersList(offset = Constant.paginatedValue.toString())
+            }
         }
     }
 
@@ -46,7 +48,9 @@ class MarvelRepoImplTests {
     fun testCharacterDetailCalled() {
         runTest {
             repoImpl.getCharactersDetails(Constant.ID_1)
-            Mockito.verify(networkApi.getCharactersDetails(characterId = Constant.ID_1))
+            coVerify {
+                networkApi.getCharactersDetails(characterId = Constant.ID_1)
+            }
         }
     }
 

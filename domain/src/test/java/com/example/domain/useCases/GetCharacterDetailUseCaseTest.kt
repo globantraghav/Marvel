@@ -7,9 +7,10 @@ import com.example.domain.MainCoroutineRule
 import com.example.domain.model.ModelCharacterDetail
 import com.example.domain.repository.MarvelRepo
 import io.mockk.MockKAnnotations
+import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Before
@@ -59,11 +60,10 @@ class GetCharacterDetailUseCaseTest {
                     Constant.IMG_JPG
                 )
 
-            Mockito.`when`(repository.getCharactersDetails(Constant.ID_1))
-                .thenReturn(actualResponse)
+            coEvery { repository.getCharactersDetails(Constant.ID_1) } returns actualResponse
 
             val flowValue: Resource<ModelCharacterDetail> =
-                useCase.invoke(Constant.ID_1).first()
+                useCase.invoke(Constant.ID_1).last()
             val mockResponse: ModelCharacterDetail? = flowValue.data
             Assert.assertEquals(mockResponse?.id, actualResponse.id)
         }
@@ -82,11 +82,10 @@ class GetCharacterDetailUseCaseTest {
                     Constant.IMG_JPG
                 )
 
-            Mockito.`when`(repository.getCharactersDetails(Constant.ID_1))
-                .thenReturn(actualResponse)
+            coEvery { repository.getCharactersDetails(Constant.ID_1) } returns actualResponse
 
             val flowValue: Resource<ModelCharacterDetail> =
-                useCase.invoke(Constant.ID_1).first()
+                useCase.invoke(Constant.ID_1).last()
             val mockResponse: ModelCharacterDetail? = flowValue.data
             Assert.assertEquals(mockResponse?.name, actualResponse.name)
         }
@@ -105,11 +104,10 @@ class GetCharacterDetailUseCaseTest {
                     Constant.IMG_JPG
                 )
 
-            Mockito.`when`(repository.getCharactersDetails(Constant.ID_1))
-                .thenReturn(actualResponse)
+            coEvery { repository.getCharactersDetails(Constant.ID_1) } returns actualResponse
 
             val flowValue: Resource<ModelCharacterDetail> =
-                useCase.invoke(Constant.ID_1).first()
+                useCase.invoke(Constant.ID_1).last()
             val mockResponse: ModelCharacterDetail? = flowValue.data
             Assert.assertEquals(mockResponse?.description, actualResponse.description)
         }
@@ -128,11 +126,10 @@ class GetCharacterDetailUseCaseTest {
                     Constant.IMG_JPG
                 )
 
-            Mockito.`when`(repository.getCharactersDetails(Constant.ID_1))
-                .thenReturn(actualResponse)
+            coEvery { repository.getCharactersDetails(Constant.ID_1) } returns actualResponse
 
             val flowValue: Resource<ModelCharacterDetail> =
-                useCase.invoke(Constant.ID_1).first()
+                useCase.invoke(Constant.ID_1).last()
             val mockResponse: ModelCharacterDetail? = flowValue.data
             Assert.assertEquals(mockResponse?.thumbnail, actualResponse.thumbnail)
         }
@@ -151,11 +148,10 @@ class GetCharacterDetailUseCaseTest {
                     Constant.IMG_JPG
                 )
 
-            Mockito.`when`(repository.getCharactersDetails(Constant.ID_1))
-                .thenReturn(actualResponse)
+            coEvery { repository.getCharactersDetails(Constant.ID_1) } returns actualResponse
 
             val flowValue: Resource<ModelCharacterDetail> =
-                useCase.invoke(Constant.ID_1).first()
+                useCase.invoke(Constant.ID_1).last()
             val mockResponse: ModelCharacterDetail? = flowValue.data
             Assert.assertEquals(mockResponse?.thumbnailExt, actualResponse.thumbnailExt)
         }

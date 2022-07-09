@@ -7,16 +7,17 @@ import com.example.domain.MainCoroutineRule
 import com.example.domain.model.ModelCharacter
 import com.example.domain.repository.MarvelRepo
 import io.mockk.MockKAnnotations
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mockito.`when`
-import org.mockito.Mockito.verify
 
 @ExperimentalCoroutinesApi
 class GetCharacterListUseCaseTest {
@@ -43,7 +44,9 @@ class GetCharacterListUseCaseTest {
     fun testGetCharacterListsUseCaseCalledOrNot() {
         runTest {
             useCase.invoke(Constant.paginatedValue)
-            verify(repository.getCharactersList(Constant.paginatedValue))
+            coVerify {
+                repository.getCharactersList(Constant.paginatedValue)
+            }
         }
     }
 
@@ -51,7 +54,6 @@ class GetCharacterListUseCaseTest {
     fun testGetCharacterListSize() {
 
         runTest {
-
             val actualResponse: List<ModelCharacter> = listOf(
                 ModelCharacter(
                     Constant.ID_1,
@@ -61,14 +63,12 @@ class GetCharacterListUseCaseTest {
                     Constant.IMG_JPG
                 )
             )
-            `when`(repository.getCharactersList(Constant.paginatedValue))
-                .thenReturn(actualResponse)
+            coEvery { repository.getCharactersList(Constant.paginatedValue) } returns actualResponse
 
             val flowValue: Resource<List<ModelCharacter>> =
-                useCase.invoke(Constant.paginatedValue).first()
+                useCase.invoke(Constant.paginatedValue).last()
             val mockResponse: List<ModelCharacter>? = flowValue.data
             Assert.assertEquals(mockResponse?.size, actualResponse.size)
-
         }
     }
 
@@ -85,11 +85,10 @@ class GetCharacterListUseCaseTest {
                     Constant.IMG_JPG
                 )
             )
-            `when`(repository.getCharactersList(Constant.paginatedValue))
-                .thenReturn(actualResponse)
+            coEvery { repository.getCharactersList(Constant.paginatedValue) } returns actualResponse
 
             val flowValue: Resource<List<ModelCharacter>> =
-                useCase.invoke(Constant.paginatedValue).first()
+                useCase.invoke(Constant.paginatedValue).last()
             val mockResponse: List<ModelCharacter>? = flowValue.data
             Assert.assertEquals(mockResponse?.first()?.id, actualResponse.first().id)
         }
@@ -109,11 +108,10 @@ class GetCharacterListUseCaseTest {
                     Constant.IMG_JPG
                 )
             )
-            `when`(repository.getCharactersList(Constant.paginatedValue))
-                .thenReturn(actualResponse)
+            coEvery { repository.getCharactersList(Constant.paginatedValue) } returns actualResponse
 
             val flowValue: Resource<List<ModelCharacter>> =
-                useCase.invoke(Constant.paginatedValue).first()
+                useCase.invoke(Constant.paginatedValue).last()
             val mockResponse: List<ModelCharacter>? = flowValue.data
             Assert.assertEquals(mockResponse?.first()?.name, actualResponse.first().name)
         }
@@ -133,11 +131,10 @@ class GetCharacterListUseCaseTest {
                     Constant.IMG_JPG
                 )
             )
-            `when`(repository.getCharactersList(Constant.paginatedValue))
-                .thenReturn(actualResponse)
+            coEvery { repository.getCharactersList(Constant.paginatedValue) } returns actualResponse
 
             val flowValue: Resource<List<ModelCharacter>> =
-                useCase.invoke(Constant.paginatedValue).first()
+                useCase.invoke(Constant.paginatedValue).last()
             val mockResponse: List<ModelCharacter>? = flowValue.data
             Assert.assertEquals(
                 mockResponse?.first()?.description,
@@ -160,11 +157,10 @@ class GetCharacterListUseCaseTest {
                     Constant.IMG_JPG
                 )
             )
-            `when`(repository.getCharactersList(Constant.paginatedValue))
-                .thenReturn(actualResponse)
+            coEvery { repository.getCharactersList(Constant.paginatedValue) } returns actualResponse
 
             val flowValue: Resource<List<ModelCharacter>> =
-                useCase.invoke(Constant.paginatedValue).first()
+                useCase.invoke(Constant.paginatedValue).last()
             val mockResponse: List<ModelCharacter>? = flowValue.data
             Assert.assertEquals(mockResponse?.first()?.thumbnail, actualResponse.first().thumbnail)
         }
@@ -184,11 +180,10 @@ class GetCharacterListUseCaseTest {
                     Constant.IMG_JPG
                 )
             )
-            `when`(repository.getCharactersList(Constant.paginatedValue))
-                .thenReturn(actualResponse)
+            coEvery { repository.getCharactersList(Constant.paginatedValue) } returns actualResponse
 
             val flowValue: Resource<List<ModelCharacter>> =
-                useCase.invoke(Constant.paginatedValue).first()
+                useCase.invoke(Constant.paginatedValue).last()
             val mockResponse: List<ModelCharacter>? = flowValue.data
             Assert.assertEquals(
                 mockResponse?.first()?.thumbnailExt,
