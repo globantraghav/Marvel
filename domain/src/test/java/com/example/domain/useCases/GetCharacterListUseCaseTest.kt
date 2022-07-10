@@ -41,17 +41,16 @@ class GetCharacterListUseCaseTest {
     }
 
     @Test
-    fun testGetCharacterListsUseCaseCalledOrNot() {
+    fun `testGetCharacterListsUseCaseCalledOrNot`()=
         runTest {
             useCase.invoke(Constant.paginatedValue)
             coVerify {
                 repository.getCharactersList(Constant.paginatedValue)
             }
         }
-    }
 
     @Test
-    fun testGetCharacterListSize() {
+    fun `testGetCharacterListSize`()=
 
         runTest {
             val actualResponse: List<ModelCharacter> = listOf(
@@ -70,10 +69,9 @@ class GetCharacterListUseCaseTest {
             val mockResponse: List<ModelCharacter>? = flowValue.data
             Assert.assertEquals(mockResponse?.size, actualResponse.size)
         }
-    }
 
     @Test
-    fun testGetCharacterListId() {
+    fun `testGetCharacterListId`() =
         runTest {
 
             val actualResponse: List<ModelCharacter> = listOf(
@@ -92,10 +90,9 @@ class GetCharacterListUseCaseTest {
             val mockResponse: List<ModelCharacter>? = flowValue.data
             Assert.assertEquals(mockResponse?.first()?.id, actualResponse.first().id)
         }
-    }
 
     @Test
-    fun testGetCharacterListName() {
+    fun `testGetCharacterListName`() =
 
         runTest {
 
@@ -115,10 +112,9 @@ class GetCharacterListUseCaseTest {
             val mockResponse: List<ModelCharacter>? = flowValue.data
             Assert.assertEquals(mockResponse?.first()?.name, actualResponse.first().name)
         }
-    }
 
     @Test
-    fun testGetCharacterListDescription() {
+    fun `testGetCharacterListDescription`()=
 
         runTest {
 
@@ -141,10 +137,9 @@ class GetCharacterListUseCaseTest {
                 actualResponse.first().description
             )
         }
-    }
 
     @Test
-    fun testGetCharacterListThumbnail() {
+    fun `testGetCharacterListThumbnail`() =
 
         runTest {
 
@@ -164,10 +159,9 @@ class GetCharacterListUseCaseTest {
             val mockResponse: List<ModelCharacter>? = flowValue.data
             Assert.assertEquals(mockResponse?.first()?.thumbnail, actualResponse.first().thumbnail)
         }
-    }
 
     @Test
-    fun testGetCharacterListThumbnailExt() {
+    fun `testGetCharacterListThumbnailExt`()=
 
         runTest {
 
@@ -190,6 +184,4 @@ class GetCharacterListUseCaseTest {
                 actualResponse.first().thumbnailExt
             )
         }
-    }
-
 }

@@ -35,23 +35,22 @@ class MarvelRepoImplTests {
     }
 
     @Test
-    fun testCharacterListCalled() {
+    fun `testCharacterListCalled`()=
         runTest {
             repoImpl.getCharactersList(Constant.paginatedValue)
             coVerify {
                 networkApi.getCharactersList(offset = Constant.paginatedValue.toString())
             }
         }
-    }
 
     @Test
-    fun testCharacterDetailCalled() {
+    fun `testCharacterDetailCalled`() =
         runTest {
             repoImpl.getCharactersDetails(Constant.ID_1)
             coVerify {
                 networkApi.getCharactersDetails(characterId = Constant.ID_1)
             }
         }
-    }
+
 
 }

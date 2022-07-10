@@ -40,7 +40,7 @@ class CharacterListViewModelTest {
     }
 
     @Test
-    fun testCharactersForEmptyResponse() {
+    fun `testCharactersListForEmptyResponse`() =
 
         runTest {
             val actualResponse = MarvelListData(
@@ -56,10 +56,9 @@ class CharacterListViewModelTest {
             viewModel.getCharactersList(Constant.paginatedValue)
             Assert.assertEquals(viewModel.marvelList.getOrAwaitValue(), actualResponse)
         }
-    }
 
     @Test
-    fun testCharactersForNonEmptyResponse() {
+    fun `testCharactersListForNonEmptyResponse`() =
 
         runTest {
             val actualResponse = MarvelListData(
@@ -91,10 +90,9 @@ class CharacterListViewModelTest {
             viewModel.getCharactersList(Constant.paginatedValue)
             Assert.assertEquals(viewModel.marvelList.getOrAwaitValue(), actualResponse)
         }
-    }
 
     @Test
-    fun testErrorNoCharacter() {
+    fun `testErrorNoCharacterList`() =
 
         runTest {
             val actualResponse = MarvelListData(
@@ -110,10 +108,9 @@ class CharacterListViewModelTest {
             viewModel.getCharactersList(Constant.paginatedValue)
             Assert.assertEquals(viewModel.marvelList.getOrAwaitValue(), actualResponse)
         }
-    }
 
     @Test
-    fun testCharactersForNonEqualResponse() {
+    fun `testCharactersListForNonEqualResponse`() =
 
         runTest {
             val actualResponse = MarvelListData(
@@ -145,6 +142,4 @@ class CharacterListViewModelTest {
             viewModel.getCharactersList(Constant.paginatedValue)
             Assert.assertNotEquals(viewModel.marvelList.getOrAwaitValue(), actualResponse)
         }
-    }
-
 }

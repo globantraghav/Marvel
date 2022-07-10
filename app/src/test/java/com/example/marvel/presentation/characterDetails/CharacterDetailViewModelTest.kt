@@ -37,16 +37,18 @@ class CharacterDetailViewModelTest {
     }
 
     @Test
-    fun testCharactersDetailsForEqualResponse() {
-        val modelCharacterDetailMock = ModelCharacterDetail(
-            Constant.ID_1,
-            Constant.Iron_Man,
-            Constant.Best_Avenger,
-            Constant.Iron_Man_Image,
-            Constant.IMG_JPG
-        )
+    fun `testCharactersDetailsForEqualResponse`() =
 
         runTest {
+
+            val modelCharacterDetailMock = ModelCharacterDetail(
+                Constant.ID_1,
+                Constant.Iron_Man,
+                Constant.Best_Avenger,
+                Constant.Iron_Man_Image,
+                Constant.IMG_JPG
+            )
+
             val actualResponse = CharacterDetailData(
                 isLoading = false,
                 modelCharacterDetails = modelCharacterDetailMock,
@@ -56,26 +58,27 @@ class CharacterDetailViewModelTest {
             viewModel.getCharacterDetails(Constant.ID_1)
             Assert.assertEquals(viewModel.characterDetails.getOrAwaitValue(), actualResponse)
         }
-    }
+
 
     @Test
-    fun testCharactersDetailsForNonEqualResponse() {
-        val modelCharacterDetailMock = ModelCharacterDetail(
-            Constant.ID_1,
-            Constant.Iron_Man,
-            Constant.Best_Avenger,
-            Constant.Iron_Man_Image,
-            Constant.IMG_JPG
-        )
-        val modelCharacterDetailActual = ModelCharacterDetail(
-            Constant.ID_2,
-            Constant.Captain,
-            Constant.First_Avenger,
-            Constant.Captain_America_Image,
-            Constant.IMG_JPG
-        )
+    fun `testCharactersDetailsForNonEqualResponse`()=
 
         runTest {
+
+            val modelCharacterDetailMock = ModelCharacterDetail(
+                Constant.ID_1,
+                Constant.Iron_Man,
+                Constant.Best_Avenger,
+                Constant.Iron_Man_Image,
+                Constant.IMG_JPG
+            )
+            val modelCharacterDetailActual = ModelCharacterDetail(
+                Constant.ID_2,
+                Constant.Captain,
+                Constant.First_Avenger,
+                Constant.Captain_America_Image,
+                Constant.IMG_JPG
+            )
             val actualResponse = CharacterDetailData(
                 isLoading = false,
                 modelCharacterDetails = modelCharacterDetailActual,
@@ -85,10 +88,9 @@ class CharacterDetailViewModelTest {
             viewModel.getCharacterDetails(Constant.ID_1)
             Assert.assertNotEquals(viewModel.characterDetails.getOrAwaitValue(), actualResponse)
         }
-    }
 
     @Test
-    fun testCharactersDetailsForErrorResponse() {
+    fun `testCharactersDetailsForErrorResponse`()=
 
         runTest {
             val actualResponse = CharacterDetailData(
@@ -100,5 +102,4 @@ class CharacterDetailViewModelTest {
             viewModel.getCharacterDetails(Constant.ID_1)
             Assert.assertEquals(viewModel.characterDetails.getOrAwaitValue(), actualResponse)
         }
-    }
 }

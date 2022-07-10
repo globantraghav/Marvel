@@ -40,15 +40,14 @@ class GetCharacterDetailUseCaseTest {
     }
 
     @Test
-    fun testCharacterDetailsUseCaseCalledOrNot() {
+    fun `testCharacterDetailsUseCaseCalledOrNot`() =
         runTest {
             useCase.invoke(Constant.paginatedValue)
             Mockito.verify(repository.getCharactersDetails(Constant.paginatedValue))
         }
-    }
 
     @Test
-    fun testCharacterDetailsId() {
+    fun `testCharacterDetailsId`()=
 
         runTest {
             val actualResponse =
@@ -67,10 +66,9 @@ class GetCharacterDetailUseCaseTest {
             val mockResponse: ModelCharacterDetail? = flowValue.data
             Assert.assertEquals(mockResponse?.id, actualResponse.id)
         }
-    }
 
     @Test
-    fun testCharacterDetailsName() {
+    fun `testCharacterDetailsName`()=
 
         runTest {
             val actualResponse =
@@ -89,10 +87,9 @@ class GetCharacterDetailUseCaseTest {
             val mockResponse: ModelCharacterDetail? = flowValue.data
             Assert.assertEquals(mockResponse?.name, actualResponse.name)
         }
-    }
 
     @Test
-    fun testCharacterDetailsDescription() {
+    fun `testCharacterDetailsDescription`()=
 
         runTest {
             val actualResponse =
@@ -111,10 +108,9 @@ class GetCharacterDetailUseCaseTest {
             val mockResponse: ModelCharacterDetail? = flowValue.data
             Assert.assertEquals(mockResponse?.description, actualResponse.description)
         }
-    }
 
     @Test
-    fun testCharacterDetailsThumbnail() {
+    fun `testCharacterDetailsThumbnail`() =
 
         runTest {
             val actualResponse =
@@ -133,10 +129,9 @@ class GetCharacterDetailUseCaseTest {
             val mockResponse: ModelCharacterDetail? = flowValue.data
             Assert.assertEquals(mockResponse?.thumbnail, actualResponse.thumbnail)
         }
-    }
 
     @Test
-    fun testCharacterDetailsThumbnailExt() {
+    fun `testCharacterDetailsThumbnailExt`()=
 
         runTest {
             val actualResponse =
@@ -155,5 +150,4 @@ class GetCharacterDetailUseCaseTest {
             val mockResponse: ModelCharacterDetail? = flowValue.data
             Assert.assertEquals(mockResponse?.thumbnailExt, actualResponse.thumbnailExt)
         }
-    }
 }
