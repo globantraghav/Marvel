@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="characterListViewModel"
+            type="com.example.marvel.presentation.characterList.CharacterListViewModel" />
+
+        <variable
+            name="characterListAdapter"
+            type="com.example.marvel.presentation.characterList.CharacterListAdapter" />
+    </data>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -28,3 +40,5 @@
     </ProgressBar>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
