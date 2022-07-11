@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.common.Constant
+import com.example.common.Constant.Companion.Empty_String
 import com.example.common.Resource
 import com.example.domain.useCases.GetCharacterListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,25 +20,34 @@ class CharacterListViewModel @Inject constructor(
     private val _marvelList = MutableLiveData(MarvelListData())
     val marvelList: LiveData<MarvelListData> = _marvelList
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> = _isLoading
+
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String> = _errorMessage
+
     fun getCharactersList(offset: Int) {
         characterListUseCase(offset).onEach { result ->
             when (result) {
                 is Resource.Success -> {
+                    _isLoading.value = false
+                    _errorMessage.value = Empty_String
                     _marvelList.value =
                         MarvelListData(modelCharacterList = result.data ?: emptyList())
                 }
                 is Resource.Error -> {
-                    _marvelList.value =
-                        MarvelListData(error = result.message ?: Unexpected_Error)
+                    _isLoading.value = false
+                    _errorMessage.value = result.message ?: Unexpected_Error
                 }
                 is Resource.Loading -> {
-                    _marvelList.value = MarvelListData(isLoading = true)
+                    _errorMessage.value = Empty_String
+                    _isLoading.value = true
                 }
             }
         }.launchIn(viewModelScope)
     }
 
-    companion object{
+    companion object {
         const val Unexpected_Error = "Unexpected Error"
     }
 }

@@ -5,7 +5,6 @@ import org.json.JSONException
 import org.json.JSONObject
 import retrofit2.Response
 
-
 abstract class SafeApiRequest {
 
     suspend fun <T : Any> safeApiRequest(call: suspend () -> Response<T>): T {

@@ -47,7 +47,7 @@ class GetCharacterDetailUseCaseTest {
         }
 
     @Test
-    fun `testCharacterDetailsId`()=
+    fun `testCharacterDetailsId`() =
 
         runTest {
             val actualResponse =
@@ -68,7 +68,7 @@ class GetCharacterDetailUseCaseTest {
         }
 
     @Test
-    fun `testCharacterDetailsName`()=
+    fun `testCharacterDetailsName`() =
 
         runTest {
             val actualResponse =
@@ -89,7 +89,7 @@ class GetCharacterDetailUseCaseTest {
         }
 
     @Test
-    fun `testCharacterDetailsDescription`()=
+    fun `testCharacterDetailsDescription`() =
 
         runTest {
             val actualResponse =
@@ -131,7 +131,7 @@ class GetCharacterDetailUseCaseTest {
         }
 
     @Test
-    fun `testCharacterDetailsThumbnailExt`()=
+    fun `testCharacterDetailsThumbnailExt`() =
 
         runTest {
             val actualResponse =

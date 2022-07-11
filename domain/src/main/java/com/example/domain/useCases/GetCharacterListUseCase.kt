@@ -1,6 +1,5 @@
 package com.example.domain.useCases
 
-import com.example.common.Constant
 import com.example.common.Resource
 import com.example.domain.model.ModelCharacter
 import com.example.domain.repository.MarvelRepo
@@ -26,7 +25,7 @@ class GetCharacterListUseCase @Inject constructor(
         }
     }
 
-    companion object{
+    companion object {
         const val Error = "Error is"
     }
 }

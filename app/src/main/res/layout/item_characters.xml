@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout>
+
     <data>
+
         <variable
             name="character"
             type="com.example.domain.model.ModelCharacter" />
+
         <variable
             name="characterClick"
             type="com.example.marvel.presentation.characterList.CharacterClick" />
@@ -16,8 +19,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_5"
         android:layout_marginVertical="@dimen/dp_8"
-        android:onClick="@{() -> characterClick.click(character.id)}"
-        >
+        android:onClick="@{() -> characterClick.click(character.id)}">
 
         <ImageView
             android:id="@+id/ivCharacter"
@@ -27,8 +29,7 @@
             android:layout_height="@dimen/dp_100"
             android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-        </ImageView>
+            app:layout_constraintTop_toTopOf="parent"></ImageView>
 
         <TextView
             android:id="@+id/tvCharacterName"
@@ -38,7 +39,6 @@
             android:text="@{character.name}"
             android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivCharacter">
-        </TextView>
+            app:layout_constraintTop_toBottomOf="@+id/ivCharacter"></TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

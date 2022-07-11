@@ -143,7 +143,7 @@ class CharacterListViewModelTest {
             Assert.assertNotEquals(viewModel.marvelList.getOrAwaitValue(), actualResponse)
         }
 
-    companion object{
+    companion object {
         const val Non_Empty_List = "Character list cannot be empty"
         const val Captain = "Captain America"
         const val First_Avenger = "First Avenger"

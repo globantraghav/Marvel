@@ -4,9 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.common.Constant
+import com.example.common.Constant.Companion.Empty_String
 import com.example.common.Resource
-import com.example.domain.model.ModelCharacterDetail
 import com.example.domain.useCases.GetCharacterDetailsUseCase
 import com.example.marvel.presentation.characterList.CharacterListViewModel.Companion.Unexpected_Error
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,45 +21,30 @@ class CharacterDetailViewModel @Inject constructor(
     private val _characterDetails = MutableLiveData(CharacterDetailData())
     val characterDetails: LiveData<CharacterDetailData> = _characterDetails
 
-    private val _characterImageUrl = MutableLiveData(String())
-    val characterImageUrl: LiveData<String> = _characterImageUrl
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String> = _errorMessage
 
     fun getCharacterDetails(id: Int) {
         getCharacterDetailsUseCase(id).onEach { result ->
 
             when (result) {
                 is Resource.Success -> {
+                    _errorMessage.value = Empty_String
                     _characterDetails.value =
                         CharacterDetailData(modelCharacterDetails = result.data)
-                    setUrl(result.data)
                 }
                 is Resource.Error -> {
-                    _characterDetails.value =
-                        CharacterDetailData(error = result.message ?: Unexpected_Error)
+                    _errorMessage.value = result.message ?: Unexpected_Error
                 }
                 is Resource.Loading -> {
-                    _characterDetails.value = CharacterDetailData(isLoading = true)
+                    _errorMessage.value = Empty_String
                 }
             }
-
         }.launchIn(viewModelScope)
     }
 
-    private fun setUrl(modelCharacterDetail: ModelCharacterDetail?) {
-        val url = "${
-            modelCharacterDetail?.thumbnail?.replace(
-                HTTP,
-                HTTPS
-            )
-        }${IMAGE_EXTENSION}${modelCharacterDetail?.thumbnailExt}"
-
-        _characterImageUrl.value = url
-
-    }
-
-    companion object{
+    companion object {
         const val HTTP = "http"
         const val HTTPS = "https"
-        const val IMAGE_EXTENSION = "/portrait_xlarge."
     }
 }

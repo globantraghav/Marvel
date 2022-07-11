@@ -2,6 +2,7 @@
 <layout>
 
     <data>
+
         <variable
             name="characterListViewModel"
             type="com.example.marvel.presentation.characterList.CharacterListViewModel" />
@@ -10,9 +11,6 @@
             name="characterListAdapter"
             type="com.example.marvel.presentation.characterList.CharacterListAdapter" />
 
-        <variable
-            name="isLoading"
-            type="Boolean" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -32,8 +30,7 @@
             app:setAdapter="@{characterListAdapter}"
             app:spanCount="3"
             app:submitList="@{characterListViewModel.marvelList.modelCharacterList}"
-            tools:listitem="@layout/item_characters">
-        </androidx.recyclerview.widget.RecyclerView>
+            tools:listitem="@layout/item_characters"></androidx.recyclerview.widget.RecyclerView>
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -43,8 +40,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:visibility="@{isLoading}">
-        </ProgressBar>
+            app:visibility="@{characterListViewModel.isLoading()}"></ProgressBar>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -211,7 +211,10 @@ class MarvelRepoImplTests {
                             Constant.Best_Avenger,
                             Constant.ID_1,
                             Constant.Iron_Man,
-                            com.example.data.remote.dto.characterDetail.Thumbnail(Constant.IMG_JPG, Constant.Iron_Man_Image)
+                            com.example.data.remote.dto.characterDetail.Thumbnail(
+                                Constant.IMG_JPG,
+                                Constant.Iron_Man_Image
+                            )
                         )
                     )
                 )
@@ -238,7 +241,10 @@ class MarvelRepoImplTests {
                             Constant.Best_Avenger,
                             Constant.ID_1,
                             Constant.Iron_Man,
-                            com.example.data.remote.dto.characterDetail.Thumbnail(Constant.IMG_JPG, Constant.Iron_Man_Image)
+                            com.example.data.remote.dto.characterDetail.Thumbnail(
+                                Constant.IMG_JPG,
+                                Constant.Iron_Man_Image
+                            )
                         )
                     )
                 )
@@ -265,7 +271,10 @@ class MarvelRepoImplTests {
                             Constant.Best_Avenger,
                             Constant.ID_1,
                             Constant.Iron_Man,
-                            com.example.data.remote.dto.characterDetail.Thumbnail(Constant.IMG_JPG, Constant.Iron_Man_Image)
+                            com.example.data.remote.dto.characterDetail.Thumbnail(
+                                Constant.IMG_JPG,
+                                Constant.Iron_Man_Image
+                            )
                         )
                     )
                 )
@@ -292,7 +301,10 @@ class MarvelRepoImplTests {
                             Constant.Best_Avenger,
                             Constant.ID_1,
                             Constant.Iron_Man,
-                            com.example.data.remote.dto.characterDetail.Thumbnail(Constant.IMG_JPG, Constant.Iron_Man_Image)
+                            com.example.data.remote.dto.characterDetail.Thumbnail(
+                                Constant.IMG_JPG,
+                                Constant.Iron_Man_Image
+                            )
                         )
                     )
                 )
@@ -319,7 +331,10 @@ class MarvelRepoImplTests {
                             Constant.Best_Avenger,
                             Constant.ID_1,
                             Constant.Iron_Man,
-                            com.example.data.remote.dto.characterDetail.Thumbnail(Constant.IMG_JPG, Constant.Iron_Man_Image)
+                            com.example.data.remote.dto.characterDetail.Thumbnail(
+                                Constant.IMG_JPG,
+                                Constant.Iron_Man_Image
+                            )
                         )
                     )
                 )

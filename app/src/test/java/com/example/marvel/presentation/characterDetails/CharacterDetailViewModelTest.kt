@@ -58,14 +58,18 @@ class CharacterDetailViewModelTest {
                 modelCharacterDetails = modelCharacterDetailMock,
                 error = Constant.Empty_String
             )
-            coEvery { useCase.invoke(Constant.ID_1) } returns flowOf(Resource.Success(modelCharacterDetailMock))
+            coEvery { useCase.invoke(Constant.ID_1) } returns flowOf(
+                Resource.Success(
+                    modelCharacterDetailMock
+                )
+            )
             viewModel.getCharacterDetails(Constant.ID_1)
             Assert.assertEquals(viewModel.characterDetails.getOrAwaitValue(), actualResponse)
         }
 
 
     @Test
-    fun `testCharactersDetailsForNonEqualResponse`()=
+    fun `testCharactersDetailsForNonEqualResponse`() =
 
         runTest {
 
@@ -88,13 +92,17 @@ class CharacterDetailViewModelTest {
                 modelCharacterDetails = modelCharacterDetailActual,
                 error = Constant.Empty_String
             )
-            coEvery { useCase.invoke(Constant.ID_1) } returns flowOf(Resource.Success(modelCharacterDetailMock))
+            coEvery { useCase.invoke(Constant.ID_1) } returns flowOf(
+                Resource.Success(
+                    modelCharacterDetailMock
+                )
+            )
             viewModel.getCharacterDetails(Constant.ID_1)
             Assert.assertNotEquals(viewModel.characterDetails.getOrAwaitValue(), actualResponse)
         }
 
     @Test
-    fun `testCharactersDetailsForErrorResponse`()=
+    fun `testCharactersDetailsForErrorResponse`() =
 
         runTest {
             val actualResponse = CharacterDetailData(
@@ -102,12 +110,16 @@ class CharacterDetailViewModelTest {
                 modelCharacterDetails = null,
                 error = Non_Empty_Character_Details
             )
-            coEvery { useCase.invoke(Constant.ID_1) } returns flowOf(Resource.Error(Non_Empty_Character_Details))
+            coEvery { useCase.invoke(Constant.ID_1) } returns flowOf(
+                Resource.Error(
+                    Non_Empty_Character_Details
+                )
+            )
             viewModel.getCharacterDetails(Constant.ID_1)
             Assert.assertEquals(viewModel.characterDetails.getOrAwaitValue(), actualResponse)
         }
 
-    companion object{
+    companion object {
         const val Non_Empty_Character_Details = "Character Details cannot be empty"
     }
 }

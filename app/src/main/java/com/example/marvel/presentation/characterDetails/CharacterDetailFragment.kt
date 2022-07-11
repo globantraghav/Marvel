@@ -7,14 +7,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.coroutineScope
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.example.common.Constant
-import com.example.domain.model.ModelCharacterDetail
 import com.example.marvel.databinding.FragmentCharacterDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 
 @AndroidEntryPoint
 class CharacterDetailFragment : Fragment() {
@@ -32,41 +27,31 @@ class CharacterDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.characterDetailsViewModel = characterDetailsViewModel
+        binding.lifecycleOwner = this
+
         arguments?.let {
             val args = CharacterDetailFragmentArgs.fromBundle(it)
             val charId: Int = args.characterId
             characterDetailsViewModel.getCharacterDetails(charId)
         }
 
-        observeViewModel()
+        observerError()
 
         binding.ivBack.setOnClickListener {
             findNavController().popBackStack()
         }
-
     }
 
-    private fun observeViewModel() {
-        lifecycle.coroutineScope.launchWhenCreated {
-            characterDetailsViewModel.characterDetails.observe(viewLifecycleOwner) { it ->
-
-                if (it.error.isNotBlank()) {
-                    Toast.makeText(
-                        this@CharacterDetailFragment.requireContext(),
-                        it.error,
-                        Toast.LENGTH_LONG
-                    ).show()
-                } else if (it.modelCharacterDetails != null) {
-                    binding.characterDetailsViewModel = characterDetailsViewModel
-                }
+    private fun observerError() {
+        characterDetailsViewModel.errorMessage.observe(this) {
+            if (it.isNotEmpty()) {
+                Toast.makeText(
+                    this@CharacterDetailFragment.requireContext(),
+                    it,
+                    Toast.LENGTH_LONG
+                ).show()
             }
-            delay(DELAY)
         }
     }
-
-    companion object{
-        const val DELAY: Long = 1000
-    }
-
-
 }

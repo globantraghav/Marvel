@@ -11,7 +11,6 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
@@ -41,7 +40,7 @@ class GetCharacterListUseCaseTest {
     }
 
     @Test
-    fun `testGetCharacterListsUseCaseCalledOrNot`()=
+    fun `testGetCharacterListsUseCaseCalledOrNot`() =
         runTest {
             useCase.invoke(Constant.paginatedValue)
             coVerify {
@@ -50,7 +49,7 @@ class GetCharacterListUseCaseTest {
         }
 
     @Test
-    fun `testGetCharacterListSize`()=
+    fun `testGetCharacterListSize`() =
 
         runTest {
             val actualResponse: List<ModelCharacter> = listOf(
@@ -114,7 +113,7 @@ class GetCharacterListUseCaseTest {
         }
 
     @Test
-    fun `testGetCharacterListDescription`()=
+    fun `testGetCharacterListDescription`() =
 
         runTest {
 
@@ -161,7 +160,7 @@ class GetCharacterListUseCaseTest {
         }
 
     @Test
-    fun `testGetCharacterListThumbnailExt`()=
+    fun `testGetCharacterListThumbnailExt`() =
 
         runTest {
 

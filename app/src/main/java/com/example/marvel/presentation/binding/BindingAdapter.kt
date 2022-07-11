@@ -5,7 +5,6 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.common.Constant
 import com.example.domain.model.ModelCharacter
 import com.example.marvel.presentation.characterDetails.CharacterDetailViewModel.Companion.HTTP
 import com.example.marvel.presentation.characterDetails.CharacterDetailViewModel.Companion.HTTPS
@@ -25,9 +24,9 @@ fun setAdapter(
 @BindingAdapter("submitList")
 fun submitList(
     recyclerView: RecyclerView, list: MutableList<ModelCharacter>?
-){
+) {
     val adapter = recyclerView.adapter as CharacterListAdapter
-    adapter.setContentList(list?: mutableListOf())
+    adapter.setContentList(list ?: mutableListOf())
 }
 
 @BindingAdapter("visibility")
@@ -35,8 +34,8 @@ fun setVisibility(view: View, value: Boolean) {
     view.visibility = if (value) View.VISIBLE else View.GONE
 }
 
-@BindingAdapter("url","extension")
-fun setImage(imageView: ImageView, url: String?, extension:String?) {
+@BindingAdapter("url", "extension")
+fun setImage(imageView: ImageView, url: String?, extension: String?) {
 
     val finalUrl = "${
         url?.replace(

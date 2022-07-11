@@ -1,6 +1,5 @@
 package com.example.data.remote.di
 
-import com.example.common.Constant
 import com.example.data.remote.NetworkApi
 import com.example.data.remote.NetworkApi.Companion.BASE_URL
 import com.example.data.repository.MarvelRepoImpl

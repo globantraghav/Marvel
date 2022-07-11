@@ -9,7 +9,7 @@
         android:id="@+id/characterListFragment"
         android:name="com.example.marvel.presentation.characterList.CharacterListFragment"
         android:label="fragment_character_list"
-        tools:layout="@layout/fragment_character_list" >
+        tools:layout="@layout/fragment_character_list">
         <action
             android:id="@+id/action_characterListFragment_to_characterDetailFragment"
             app:destination="@id/characterDetailFragment" />
@@ -19,13 +19,11 @@
         android:id="@+id/characterDetailFragment"
         android:name="com.example.marvel.presentation.characterDetails.CharacterDetailFragment"
         android:label="CharacterDetailFragment"
-        tools:layout="@layout/fragment_character_details"
-        >
+        tools:layout="@layout/fragment_character_details">
 
         <argument
             android:name="characterId"
-            app:argType="integer"
-            >
+            app:argType="integer">
 
         </argument>
 

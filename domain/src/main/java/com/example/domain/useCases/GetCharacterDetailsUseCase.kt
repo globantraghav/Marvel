@@ -25,7 +25,7 @@ class GetCharacterDetailsUseCase @Inject constructor(
         }
     }
 
-    companion object{
+    companion object {
         const val Error = "Error is"
     }
 }

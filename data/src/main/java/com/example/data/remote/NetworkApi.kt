@@ -1,6 +1,5 @@
 package com.example.data.remote
 
-import com.example.common.Constant
 import com.example.data.remote.dto.characterDetail.CharacterDetailDto
 import com.example.data.remote.dto.characterList.CharacterListDto
 import retrofit2.Response
@@ -30,7 +29,7 @@ interface NetworkApi {
         @Query("hash") hash: String = hash()
     ): Response<CharacterDetailDto>
 
-    companion object{
+    companion object {
         const val BASE_URL = "https://gateway.marvel.com/"
         val timestamp = Timestamp(System.currentTimeMillis()).time.toString()
         const val API_KEY = ""

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout>
+
     <data>
 
         <variable
@@ -42,9 +43,7 @@
             android:layout_marginTop="@dimen/dp_8"
             android:text="@{characterDetailsViewModel.characterDetails.modelCharacterDetails.name}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivCharacter"
-            >
-        </TextView>
+            app:layout_constraintTop_toBottomOf="@+id/ivCharacter"></TextView>
 
         <TextView
             android:id="@+id/tvCharacterDescription"
@@ -54,7 +53,6 @@
             android:layout_marginTop="@dimen/dp_8"
             android:text="@{characterDetailsViewModel.characterDetails.modelCharacterDetails.description}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvCharacterName">
-        </TextView>
+            app:layout_constraintTop_toBottomOf="@+id/tvCharacterName"></TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

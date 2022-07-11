@@ -8,11 +8,11 @@ fun List<Result>.toDomain(): List<ModelCharacter> {
 
     return map {
         ModelCharacter(
-            id = it.id?:0,
-            name = it.name?:"",
-            description = it.description?:"",
-            thumbnail = it.thumbnail.path?:"",
-            thumbnailExt = it.thumbnail.extension?:""
+            id = it.id ?: 0,
+            name = it.name ?: "",
+            description = it.description ?: "",
+            thumbnail = it.thumbnail.path ?: "",
+            thumbnailExt = it.thumbnail.extension ?: ""
         )
     }
 }
@@ -21,11 +21,11 @@ fun List<Result>.toDomain(): List<ModelCharacter> {
 fun com.example.data.remote.dto.characterDetail.Result.toDomain(): ModelCharacterDetail {
 
     return ModelCharacterDetail(
-        id = id?:0,
-        name = name?:"",
-        description = description?:"",
-        thumbnail = thumbnail.path?:"",
-        thumbnailExt = thumbnail.extension?:""
+        id = id ?: 0,
+        name = name ?: "",
+        description = description ?: "",
+        thumbnail = thumbnail.path ?: "",
+        thumbnailExt = thumbnail.extension ?: ""
     )
 
 }
