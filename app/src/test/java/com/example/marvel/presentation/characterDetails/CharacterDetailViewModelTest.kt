@@ -7,6 +7,10 @@ import com.example.domain.model.ModelCharacterDetail
 import com.example.domain.useCases.GetCharacterDetailsUseCase
 import com.example.marvel.MainCoroutineRule
 import com.example.marvel.getOrAwaitValue
+import com.example.marvel.presentation.characterList.CharacterListViewModelTest.Companion.Captain
+import com.example.marvel.presentation.characterList.CharacterListViewModelTest.Companion.Captain_America_Image
+import com.example.marvel.presentation.characterList.CharacterListViewModelTest.Companion.First_Avenger
+import com.example.marvel.presentation.characterList.CharacterListViewModelTest.Companion.ID_2
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
@@ -73,10 +77,10 @@ class CharacterDetailViewModelTest {
                 Constant.IMG_JPG
             )
             val modelCharacterDetailActual = ModelCharacterDetail(
-                Constant.ID_2,
-                Constant.Captain,
-                Constant.First_Avenger,
-                Constant.Captain_America_Image,
+                ID_2,
+                Captain,
+                First_Avenger,
+                Captain_America_Image,
                 Constant.IMG_JPG
             )
             val actualResponse = CharacterDetailData(
@@ -96,10 +100,14 @@ class CharacterDetailViewModelTest {
             val actualResponse = CharacterDetailData(
                 isLoading = false,
                 modelCharacterDetails = null,
-                error = Constant.Non_Empty_Character_Details
+                error = Non_Empty_Character_Details
             )
-            coEvery { useCase.invoke(Constant.ID_1) } returns flowOf(Resource.Error(Constant.Non_Empty_Character_Details))
+            coEvery { useCase.invoke(Constant.ID_1) } returns flowOf(Resource.Error(Non_Empty_Character_Details))
             viewModel.getCharacterDetails(Constant.ID_1)
             Assert.assertEquals(viewModel.characterDetails.getOrAwaitValue(), actualResponse)
         }
+
+    companion object{
+        const val Non_Empty_Character_Details = "Character Details cannot be empty"
+    }
 }

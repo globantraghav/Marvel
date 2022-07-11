@@ -20,10 +20,13 @@ class GetCharacterListUseCase @Inject constructor(
                 repository.getCharactersList(offset)
             emit(Resource.Success(characterList))
         } catch (e: HttpException) {
-            emit(Resource.Error(Constant.Error + { e.localizedMessage }))
+            emit(Resource.Error(Error + { e.localizedMessage }))
         } catch (io: IOException) {
-            emit(Resource.Error(Constant.Error + { io.localizedMessage }))
+            emit(Resource.Error(Error + { io.localizedMessage }))
         }
     }
 
+    companion object{
+        const val Error = "Error is"
+    }
 }

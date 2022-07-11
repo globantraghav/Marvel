@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.common.Constant
 import com.example.marvel.databinding.FragmentCharacterListBinding
+import com.example.marvel.presentation.characterDetails.CharacterDetailFragment.Companion.DELAY
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 
@@ -23,7 +24,7 @@ class CharacterListFragment : Fragment(),CharacterClick {
     private lateinit var layoutManager: GridLayoutManager
     private val characterListViewModel: CharacterListViewModel by viewModels()
     private lateinit var binding: FragmentCharacterListBinding
-    private var paginatedValue = Constant.ZERO
+    private var paginatedValue = ZERO
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,7 +57,7 @@ class CharacterListFragment : Fragment(),CharacterClick {
 
     override fun onResume() {
         super.onResume()
-        paginatedValue = Constant.ZERO
+        paginatedValue = ZERO
         characterListViewModel.getCharactersList(paginatedValue)
         observeList()
     }
@@ -78,7 +79,7 @@ class CharacterListFragment : Fragment(),CharacterClick {
                     binding.characterListViewModel = characterListViewModel
                 }
             }
-            delay(Constant.DELAY)
+            delay(DELAY)
         }
     }
 
@@ -90,4 +91,7 @@ class CharacterListFragment : Fragment(),CharacterClick {
         findNavController().navigate(action)
     }
 
+    companion object{
+        const val ZERO = 0
+    }
 }

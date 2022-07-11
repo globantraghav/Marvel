@@ -98,11 +98,11 @@ class CharacterListViewModelTest {
             val actualResponse = MarvelListData(
                 isLoading = false,
                 modelCharacterList = emptyList(),
-                error = Constant.Non_Empty_List
+                error = Non_Empty_List
             )
             coEvery { useCase.invoke(Constant.paginatedValue) } returns flowOf(
                 Resource.Error(
-                    Constant.Non_Empty_List
+                    Non_Empty_List
                 )
             )
             viewModel.getCharactersList(Constant.paginatedValue)
@@ -130,10 +130,10 @@ class CharacterListViewModelTest {
                 Resource.Success(
                     listOf(
                         ModelCharacter(
-                            Constant.ID_2,
-                            Constant.Captain,
-                            Constant.First_Avenger,
-                            Constant.Captain_America_Image,
+                            ID_2,
+                            Captain,
+                            First_Avenger,
+                            Captain_America_Image,
                             Constant.IMG_JPG
                         )
                     )
@@ -142,4 +142,12 @@ class CharacterListViewModelTest {
             viewModel.getCharactersList(Constant.paginatedValue)
             Assert.assertNotEquals(viewModel.marvelList.getOrAwaitValue(), actualResponse)
         }
+
+    companion object{
+        const val Non_Empty_List = "Character list cannot be empty"
+        const val Captain = "Captain America"
+        const val First_Avenger = "First Avenger"
+        const val Captain_America_Image = "captain_america.jpg"
+        const val ID_2 = 2
+    }
 }

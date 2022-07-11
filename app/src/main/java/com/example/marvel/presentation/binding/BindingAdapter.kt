@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.common.Constant
 import com.example.domain.model.ModelCharacter
+import com.example.marvel.presentation.characterDetails.CharacterDetailViewModel.Companion.HTTP
+import com.example.marvel.presentation.characterDetails.CharacterDetailViewModel.Companion.HTTPS
 import com.example.marvel.presentation.characterList.CharacterListAdapter
 
 @BindingAdapter("setAdapter")
@@ -38,8 +40,8 @@ fun setImage(imageView: ImageView, url: String?, extension:String?) {
 
     val finalUrl = "${
         url?.replace(
-            Constant.HTTP,
-            Constant.HTTPS
+            HTTP,
+            HTTPS
         )
     }/portrait_xlarge.${extension}"
 

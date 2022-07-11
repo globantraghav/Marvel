@@ -29,12 +29,16 @@ class CharacterListViewModel @Inject constructor(
                 }
                 is Resource.Error -> {
                     _marvelList.value =
-                        MarvelListData(error = result.message ?: Constant.Unexpected_Error)
+                        MarvelListData(error = result.message ?: Unexpected_Error)
                 }
                 is Resource.Loading -> {
                     _marvelList.value = MarvelListData(isLoading = true)
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    companion object{
+        const val Unexpected_Error = "Unexpected Error"
     }
 }

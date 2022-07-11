@@ -60,8 +60,12 @@ class CharacterDetailFragment : Fragment() {
                     binding.characterDetailsViewModel = characterDetailsViewModel
                 }
             }
-            delay(Constant.DELAY)
+            delay(DELAY)
         }
+    }
+
+    companion object{
+        const val DELAY: Long = 1000
     }
 
 

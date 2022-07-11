@@ -8,6 +8,7 @@ import com.example.common.Constant
 import com.example.common.Resource
 import com.example.domain.model.ModelCharacterDetail
 import com.example.domain.useCases.GetCharacterDetailsUseCase
+import com.example.marvel.presentation.characterList.CharacterListViewModel.Companion.Unexpected_Error
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -35,7 +36,7 @@ class CharacterDetailViewModel @Inject constructor(
                 }
                 is Resource.Error -> {
                     _characterDetails.value =
-                        CharacterDetailData(error = result.message ?: Constant.Unexpected_Error)
+                        CharacterDetailData(error = result.message ?: Unexpected_Error)
                 }
                 is Resource.Loading -> {
                     _characterDetails.value = CharacterDetailData(isLoading = true)
@@ -48,12 +49,18 @@ class CharacterDetailViewModel @Inject constructor(
     private fun setUrl(modelCharacterDetail: ModelCharacterDetail?) {
         val url = "${
             modelCharacterDetail?.thumbnail?.replace(
-                Constant.HTTP,
-                Constant.HTTPS
+                HTTP,
+                HTTPS
             )
-        }${Constant.IMAGE_EXTENSION}${modelCharacterDetail?.thumbnailExt}"
+        }${IMAGE_EXTENSION}${modelCharacterDetail?.thumbnailExt}"
 
         _characterImageUrl.value = url
 
+    }
+
+    companion object{
+        const val HTTP = "http"
+        const val HTTPS = "https"
+        const val IMAGE_EXTENSION = "/portrait_xlarge."
     }
 }

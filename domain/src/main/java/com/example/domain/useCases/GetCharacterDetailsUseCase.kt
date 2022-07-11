@@ -1,6 +1,5 @@
 package com.example.domain.useCases
 
-import com.example.common.Constant
 import com.example.common.Resource
 import com.example.domain.model.ModelCharacterDetail
 import com.example.domain.repository.MarvelRepo
@@ -20,10 +19,13 @@ class GetCharacterDetailsUseCase @Inject constructor(
                 repository.getCharactersDetails(charId)
             emit(Resource.Success(modelCharacterDetails))
         } catch (e: HttpException) {
-            emit(Resource.Error(Constant.Error + { e.localizedMessage }))
+            emit(Resource.Error(Error + { e.localizedMessage }))
         } catch (io: IOException) {
-            emit(Resource.Error(Constant.Error + { io.localizedMessage }))
+            emit(Resource.Error(Error + { io.localizedMessage }))
         }
     }
 
+    companion object{
+        const val Error = "Error is"
+    }
 }
