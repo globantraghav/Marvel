@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout>
-
     <data>
-
         <variable
             name="character"
             type="com.example.domain.model.ModelCharacter" />
-
         <variable
             name="characterClick"
             type="com.example.marvel.presentation.characterList.CharacterClick" />
@@ -17,18 +14,17 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/_5sdp"
-        android:layout_marginVertical="@dimen/_8sdp"
+        android:layout_marginHorizontal="@dimen/dp_5"
+        android:layout_marginVertical="@dimen/dp_8"
         android:onClick="@{() -> characterClick.click(character.id)}"
-
         >
 
         <ImageView
             android:id="@+id/ivCharacter"
             extension="@{character.thumbnailExt}"
             url="@{character.thumbnail}"
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="@dimen/_100sdp"
+            android:layout_width="@dimen/dp_100"
+            android:layout_height="@dimen/dp_100"
             android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -36,16 +32,13 @@
 
         <TextView
             android:id="@+id/tvCharacterName"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dp_0"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="@{character.name}"
             android:textAlignment="center"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/ivCharacter">
-
         </TextView>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>
