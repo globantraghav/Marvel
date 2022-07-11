@@ -1,19 +1,16 @@
 package com.example.marvel.presentation.characterList
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.NavController
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.common.Constant
 import com.example.domain.model.ModelCharacter
+import com.example.marvel.R
 import com.example.marvel.databinding.ItemCharactersBinding
 
 class CharacterListAdapter(
-    private val context: Context,
     private var modelCharacterList: MutableList<ModelCharacter>,
-    private var navController: NavController
+    private var characterClick: CharacterClick
 ) : RecyclerView.Adapter<CharacterListAdapter.ViewHolder>() {
 
     fun setContentList(list: MutableList<ModelCharacter>) {
@@ -25,41 +22,30 @@ class CharacterListAdapter(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-        val mView =
-            ItemCharactersBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(mView)
+
+        val binding: ItemCharactersBinding =
+            DataBindingUtil.inflate(
+                LayoutInflater.from(parent.context),
+                R.layout.item_characters, parent, false
+            )
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.characterName.text = modelCharacterList[position].name
-        val url = "${
-            modelCharacterList[position].thumbnail.replace(
-                Constant.HTTP,
-                Constant.HTTPS
-            )
-        }/portrait_xlarge.${modelCharacterList[position].thumbnailExt}"
-        Glide.with(context)
-            .load(url)
-            .into(holder.characterImage)
-
-        holder.itemView.setOnClickListener {
-            val action =
-                CharacterListFragmentDirections.actionCharacterListFragmentToCharacterDetailFragment(
-                    modelCharacterList[position].id
-                )
-            navController.navigate(action)
-        }
-
+        holder.bind(modelCharacterList[position], characterClick)
     }
 
     override fun getItemCount(): Int {
         return modelCharacterList.size
     }
 
-    class ViewHolder(binding: ItemCharactersBinding) : RecyclerView.ViewHolder(binding.root) {
-        val characterName = binding.tvCharacterName
-        val characterImage = binding.ivCharacter
+    class ViewHolder(var binding: ItemCharactersBinding) : RecyclerView.ViewHolder(binding.root) {
 
+        fun bind(character: ModelCharacter, characterClick: CharacterClick) {
+            binding.setVariable(BR.character, character)
+            binding.setVariable(BR.characterClick, characterClick)
+            binding.executePendingBindings()
+        }
     }
 
 }

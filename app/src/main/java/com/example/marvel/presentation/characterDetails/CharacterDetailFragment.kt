@@ -57,24 +57,12 @@ class CharacterDetailFragment : Fragment() {
                         Toast.LENGTH_LONG
                     ).show()
                 } else if (it.modelCharacterDetails != null) {
-                    setUI(it.modelCharacterDetails)
+                    binding.characterDetailsViewModel = characterDetailsViewModel
                 }
             }
             delay(Constant.DELAY)
         }
     }
 
-    private fun setUI(modelCharacterDetail: ModelCharacterDetail?) {
-
-        characterDetailsViewModel.characterImageUrl.observe(viewLifecycleOwner) { url ->
-            Glide.with(this)
-                .load(url)
-                .into(binding.ivCharacter)
-        }
-
-        binding.tvCharacterName.text = modelCharacterDetail?.name
-        binding.tvCharacterDescription.text = modelCharacterDetail?.description
-
-    }
 
 }

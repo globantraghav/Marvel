@@ -9,6 +9,10 @@
         <variable
             name="characterListAdapter"
             type="com.example.marvel.presentation.characterList.CharacterListAdapter" />
+
+        <variable
+            name="isLoading"
+            type="Boolean" />
     </data>
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -24,6 +28,11 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="3"
+        app:setAdapter="@{characterListAdapter}"
+        app:submitList="@{characterListViewModel.marvelList.modelCharacterList}"
+        tools:listitem="@layout/item_characters"
         >
     </androidx.recyclerview.widget.RecyclerView>
 
@@ -35,7 +44,7 @@
         android:id="@+id/progressBar"
         android:layout_width="@dimen/_80sdp"
         android:layout_height="@dimen/_80sdp"
-        android:visibility="gone"
+        app:visibility="@{isLoading}"
         >
     </ProgressBar>
 

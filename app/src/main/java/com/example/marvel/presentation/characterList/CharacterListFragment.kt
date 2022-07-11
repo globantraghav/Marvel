@@ -16,11 +16,9 @@ import com.example.marvel.databinding.FragmentCharacterListBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 
-
 @AndroidEntryPoint
-class CharacterListFragment : Fragment() {
+class CharacterListFragment : Fragment(),CharacterClick {
 
-    private lateinit var recyclerView: RecyclerView
     private lateinit var characterListAdapter: CharacterListAdapter
     private lateinit var layoutManager: GridLayoutManager
     private val characterListViewModel: CharacterListViewModel by viewModels()
@@ -34,17 +32,17 @@ class CharacterListFragment : Fragment() {
     ): View {
         binding = FragmentCharacterListBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        recyclerView = binding.rvCharacterList
+        characterListAdapter =
+            CharacterListAdapter(mutableListOf(),this)
+        binding.characterListAdapter = characterListAdapter
         layoutManager = GridLayoutManager(this@CharacterListFragment.requireContext(), 3)
-        recyclerViewProperties()
 
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        binding.rvCharacterList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (layoutManager.findLastVisibleItemPosition() == layoutManager.itemCount - 1) {
@@ -63,33 +61,33 @@ class CharacterListFragment : Fragment() {
         observeList()
     }
 
-    private fun recyclerViewProperties() {
-        characterListAdapter =
-            CharacterListAdapter(this.requireContext(), mutableListOf(), findNavController())
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = characterListAdapter
-
-    }
-
     private fun observeList() {
         lifecycle.coroutineScope.launchWhenCreated {
             characterListViewModel.marvelList.observe(viewLifecycleOwner) { it ->
                 if (it.isLoading) {
-                    binding.progressBar.visibility = View.VISIBLE
+                    binding.isLoading= true
                 } else if (it.error.isNotBlank()) {
-                    binding.progressBar.visibility = View.GONE
+                    binding.isLoading= false
                     Toast.makeText(
                         this@CharacterListFragment.requireContext(),
                         it.error,
                         Toast.LENGTH_LONG
                     ).show()
                 } else if (it.modelCharacterList.isNotEmpty()) {
-                    binding.progressBar.visibility = View.GONE
-                    characterListAdapter.setContentList(it.modelCharacterList.toMutableList())
+                    binding.isLoading= false
+                    binding.characterListViewModel = characterListViewModel
                 }
             }
             delay(Constant.DELAY)
         }
+    }
+
+    override fun click(charId: Int) {
+        val action =
+            CharacterListFragmentDirections.actionCharacterListFragmentToCharacterDetailFragment(
+                charId
+            )
+        findNavController().navigate(action)
     }
 
 }
