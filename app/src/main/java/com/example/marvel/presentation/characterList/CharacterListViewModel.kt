@@ -18,13 +18,16 @@ class CharacterListViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _marvelList = MutableLiveData(MarvelListData())
-    val marvelList: LiveData<MarvelListData> = _marvelList
+    val marvelList: LiveData<MarvelListData>
+         get() = _marvelList
 
     private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
 
     private val _errorMessage = MutableLiveData<String>()
-    val errorMessage: LiveData<String> = _errorMessage
+    val errorMessage: LiveData<String>
+        get() = _errorMessage
 
     fun getCharactersList(offset: Int) {
         characterListUseCase(offset).onEach { result ->

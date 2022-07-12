@@ -19,10 +19,12 @@ class CharacterDetailViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _characterDetails = MutableLiveData(CharacterDetailData())
-    val characterDetails: LiveData<CharacterDetailData> = _characterDetails
+    val characterDetails: LiveData<CharacterDetailData>
+        get() = _characterDetails
 
     private val _errorMessage = MutableLiveData<String>()
-    val errorMessage: LiveData<String> = _errorMessage
+    val errorMessage: LiveData<String>
+        get() = _errorMessage
 
     fun getCharacterDetails(id: Int) {
         getCharacterDetailsUseCase(id).onEach { result ->
