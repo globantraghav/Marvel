@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.model.ModelCharacter
 import com.example.marvel.R
 import com.example.marvel.databinding.ItemCharactersBinding
+import com.example.marvel.BR
 
 class CharacterListAdapter(
     private var modelCharacterList: MutableList<ModelCharacter>,
@@ -39,7 +40,7 @@ class CharacterListAdapter(
         return modelCharacterList.size
     }
 
-    class ViewHolder(var binding: ItemCharactersBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder(private var binding: ItemCharactersBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(character: ModelCharacter, characterClick: CharacterClick) {
             binding.setVariable(BR.character, character)
