@@ -30,7 +30,7 @@
             app:setAdapter="@{characterListAdapter}"
             app:spanCount="3"
             app:submitList="@{characterListViewModel.marvelList.modelCharacterList}"
-            tools:listitem="@layout/item_characters"></androidx.recyclerview.widget.RecyclerView>
+            tools:listitem="@layout/item_characters" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -40,7 +40,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:visibility="@{characterListViewModel.isLoading()}"></ProgressBar>
+            app:visibility="@{characterListViewModel.isLoading()}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
