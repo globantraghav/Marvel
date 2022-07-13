@@ -19,7 +19,7 @@ class CharacterDetailFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentCharacterDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -37,20 +37,25 @@ class CharacterDetailFragment : Fragment() {
         }
 
         observerError()
-
-        binding.ivBack.setOnClickListener {
-            findNavController().popBackStack()
-        }
+        observerBackClick()
     }
 
     private fun observerError() {
-        characterDetailsViewModel.errorMessage.observe(this) {
+        characterDetailsViewModel.errorMessage.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
                 Toast.makeText(
                     this@CharacterDetailFragment.requireContext(),
                     it,
                     Toast.LENGTH_LONG
                 ).show()
+            }
+        }
+    }
+
+    private fun observerBackClick(){
+        characterDetailsViewModel.backClick.observe(viewLifecycleOwner) {
+            if (it) {
+                findNavController().popBackStack()
             }
         }
     }

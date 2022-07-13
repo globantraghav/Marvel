@@ -33,7 +33,9 @@
             android:src="@drawable/ic_back"
             tools:ignore="ContentDescription"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="@{()->characterDetailsViewModel.backClick(true)}"
+            >
 
         </ImageView>
 

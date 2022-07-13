@@ -26,6 +26,10 @@ class CharacterDetailViewModel @Inject constructor(
     val errorMessage: LiveData<String>
         get() = _errorMessage
 
+    private val _backClick = MutableLiveData<Boolean>()
+    val backClick: LiveData<Boolean>
+        get() = _backClick
+
     fun getCharacterDetails(id: Int) {
         getCharacterDetailsUseCase(id).onEach { result ->
 
@@ -43,6 +47,10 @@ class CharacterDetailViewModel @Inject constructor(
                 }
             }
         }.launchIn(viewModelScope)
+    }
+
+    fun backClick(isBackClicked:Boolean){
+        _backClick.value = isBackClicked
     }
 
     companion object {
